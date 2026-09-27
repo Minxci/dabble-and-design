@@ -8,7 +8,7 @@ const icons = { Shirt, Users, PartyPopper, Store, Gift, PawPrint };
 export default function MadeForPeople() {
   return (
     <section className="border-y border-navy/[0.07] bg-paper py-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="site-x">
         <SectionHeading eyebrow="Shop by occasion" title="Made for your" accent="people" align="center" />
         <ul className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-navy/[0.07] bg-navy/[0.07] sm:grid-cols-3 lg:grid-cols-6">
           {shopFor.map((item) => {
