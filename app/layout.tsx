@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Caveat_Brush, Fraunces, Nunito } from "next/font/google";
+import { Caveat_Brush, Nunito } from "next/font/google";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", axes: ["SOFT", "opsz"] });
 const caveatBrush = Caveat_Brush({ weight: "400", subsets: ["latin"], variable: "--font-caveat-brush" });
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
 
@@ -13,13 +15,18 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png?v=2",
     apple: "/logo.png?v=2",
-  }
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${caveatBrush.variable} ${nunito.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${caveatBrush.variable} ${nunito.variable}`}>
+      <body className="font-sans antialiased">
+        <AnnouncementBar />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

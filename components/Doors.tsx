@@ -1,31 +1,33 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Button from "./Button";
 import ProductImage from "./ProductImage";
+import type { Tone } from "@/lib/data";
 
-const doors = [
-  { no: "01", title: "Shop", text: "Ready-made designs and seasonal collections.", href: "/shop", tone: "teal" as const },
-  { no: "02", title: "Custom", text: "Personalized shirts, team orders, events and gifts.", href: "/custom", tone: "sun" as const },
-  { no: "03", title: "Business Partner", text: "Saved logos, employee sizes, easy reorders and bulk pricing.", href: "/business", tone: "navy" as const },
+const doors: { title: string; text: string; cta: string; href: string; variant: "coral" | "teal" | "sun"; tone: Tone }[] = [
+  { title: "Shop", text: "Ready-made designs, collections and more.", cta: "Shop Now", href: "/shop", variant: "coral", tone: "teal" },
+  { title: "Custom", text: "Personalized shirts, team orders, events, gifts & more.", cta: "Start Here", href: "/custom", variant: "teal", tone: "cream" },
+  { title: "Business Partner", text: "Save your logo, employee sizes, easy reorders and bulk pricing.", cta: "Learn More", href: "/business", variant: "sun", tone: "navy" },
 ];
 
 export default function Doors() {
   return (
-    <section className="site-x">
-      <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
+    <section className="site-x relative z-10 -mt-4 lg:-mt-10">
+      {/* Swipe row on phones, 3 columns on tablets and up */}
+      <div className="no-scrollbar bleed-x flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
         {doors.map((d) => (
-          <Link key={d.title} href={d.href} className="group w-[80%] shrink-0 snap-start md:w-auto">
-            <ProductImage alt={`${d.title} example`} tone={d.tone} className="aspect-[4/3] rounded-3xl" />
-            <div className="mt-5 flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-bold tracking-[0.25em] text-navy/40">{d.no}</p>
-                <h2 className="mt-1 font-display text-3xl font-medium">{d.title}</h2>
-                <p className="mt-2 max-w-xs text-ink">{d.text}</p>
-              </div>
-              <span className="mt-1 grid size-11 shrink-0 place-items-center rounded-full border border-navy/15 transition duration-300 group-hover:border-navy group-hover:bg-navy group-hover:text-paper">
-                <ArrowUpRight className="size-5" aria-hidden />
-              </span>
+          <article
+            key={d.title}
+            className="flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-navy/10 bg-paper shadow-md md:w-auto"
+          >
+            {/* Swap for her photos: e.g. src="/images/door-shop.jpg" */}
+            <ProductImage alt={`${d.title} example`} tone={d.tone} className="aspect-[16/9]" />
+            <div className="flex flex-1 flex-col p-5">
+              <h2 className="font-script text-4xl">{d.title}</h2>
+              <p className="mt-1 flex-1 text-ink">{d.text}</p>
+              <Button href={d.href} variant={d.variant} className="mt-4 w-full">
+                {d.cta}
+              </Button>
             </div>
-          </Link>
+          </article>
         ))}
       </div>
     </section>

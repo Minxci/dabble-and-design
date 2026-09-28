@@ -1,39 +1,69 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import ProductImage from "./ProductImage";
-import SectionHeading from "./SectionHeading";
+import { Sparkle } from "./Doodles";
 import { freshProducts } from "@/lib/data";
 
 export default function FreshDrops() {
+  const row = useRef<HTMLDivElement>(null);
+  const scroll = (dir: 1 | -1) => row.current?.scrollBy({ left: dir * row.current.clientWidth * 0.8, behavior: "smooth" });
+
   return (
-    <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-        <SectionHeading eyebrow="New this week" title="Fresh from the" accent="Dabble" />
-        <Link href="/shop" className="group inline-flex items-center gap-2 border-b border-navy/30 pb-1 text-sm font-bold tracking-wider uppercase hover:border-navy">
-          Shop all <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+    <section className="site-x py-14">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="flex items-center gap-2 font-script text-4xl sm:text-5xl">
+          <Sparkle className="size-5 text-sun" />
+          Fresh from the Dabble
+          <Sparkle className="size-5 text-sun" />
+        </h2>
+        <Link href="/shop" className="inline-flex shrink-0 items-center gap-1 font-extrabold hover:text-coral">
+          View All <ArrowRight className="size-4" />
         </Link>
       </div>
 
-      <div className="no-scrollbar -mx-5 flex snap-x gap-5 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:px-0">
-        {freshProducts.slice(0, 4).map((p) => (
-          <Link key={p.id} href={`/shop/${p.id}`} className="group w-60 shrink-0 snap-start lg:w-auto">
-            <div className="relative overflow-hidden rounded-2xl">
-              <ProductImage src={p.image} alt={p.name} tone={p.tone} className="aspect-[4/5]" />
-              {p.tag && (
-                <span className="absolute top-3 left-3 rounded-full bg-paper/95 px-3 py-1 text-[11px] font-bold tracking-widest uppercase">
-                  {p.tag}
+      <div className="relative">
+        <button
+          onClick={() => scroll(-1)}
+          aria-label="Previous products"
+          className="absolute top-[38%] -left-3 z-10 hidden size-10 place-items-center rounded-full bg-paper shadow-md ring-1 ring-navy/10 hover:bg-white sm:grid"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+
+        <div ref={row} className="no-scrollbar flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2">
+          {freshProducts.map((p) => (
+            <Link
+              key={p.id}
+              href={`/shop/${p.id}`}
+              className="group shrink-0 basis-[46%] snap-start sm:basis-[31%] lg:basis-[calc((100%-4rem)/5)]"
+            >
+              <div className="relative overflow-hidden rounded-xl">
+                <ProductImage
+                  src={p.image}
+                  alt={p.name}
+                  tone={p.tone}
+                  className="aspect-square transition duration-300 group-hover:scale-[1.03]"
+                />
+                <span className="absolute top-2 right-2 grid size-8 place-items-center rounded-full bg-white text-coral shadow">
+                  <Heart className="size-4" aria-hidden />
                 </span>
-              )}
-              <span className="absolute inset-x-3 bottom-3 translate-y-2 rounded-full bg-navy py-2.5 text-center text-sm font-bold text-paper opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                View design
-              </span>
-            </div>
-            <div className="mt-4 flex items-baseline justify-between gap-3">
-              <h3 className="font-display text-lg leading-snug font-medium">{p.name}</h3>
-              <p className="shrink-0 text-sm font-bold text-ink">${p.price.toFixed(2)}</p>
-            </div>
-          </Link>
-        ))}
+              </div>
+              <h3 className="mt-2 text-sm font-bold group-hover:text-coral">{p.name}</h3>
+              <p className="text-sm font-extrabold">${p.price.toFixed(2)}</p>
+            </Link>
+          ))}
+        </div>
+
+        <button
+          onClick={() => scroll(1)}
+          aria-label="Next products"
+          className="absolute top-[38%] -right-3 z-10 hidden size-10 place-items-center rounded-full bg-paper shadow-md ring-1 ring-navy/10 hover:bg-white sm:grid"
+        >
+          <ChevronRight className="size-5" />
+        </button>
       </div>
     </section>
   );

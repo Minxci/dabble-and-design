@@ -4,44 +4,37 @@ import { Heart, Sparkle } from "./Doodles";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* soft background blobs */}
-      <div className="pointer-events-none absolute -top-32 -right-32 size-[34rem] rounded-full bg-coral-soft/70 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -left-40 size-[30rem] rounded-full bg-teal-soft/70 blur-3xl" />
-
-      <div className="site-x relative grid items-center gap-14 py-16 md:py-24 lg:grid-cols-2">
-        <div className="text-center lg:text-left">
-          <p className="text-xs font-bold tracking-[0.3em] text-teal uppercase">Custom apparel &amp; gifts</p>
-          <h1 className="mt-5 font-display text-5xl leading-[1.02] font-medium tracking-tight sm:text-6xl lg:text-7xl">
-            Custom made.
+    <section className="relative overflow-hidden bg-cream">
+      <div className="grid items-center lg:grid-cols-[1fr_1.15fr]">
+        {/* Text */}
+        <div className="site-x relative z-10 py-12 text-center lg:py-20 lg:pr-0 lg:text-left">
+          <Heart className="absolute top-8 right-10 size-9 rotate-12 text-coral lg:right-4" />
+          <Heart className="absolute bottom-24 left-4 hidden size-8 -rotate-12 text-teal lg:block" />
+          <h1 className="font-script text-6xl leading-[0.95] sm:text-7xl xl:text-8xl">
+            <span className="inline-block -rotate-2">Custom Made.</span>
             <br />
-            <span className="relative inline-block font-script text-[1.15em] font-normal text-coral">
-              Personal
-              <Heart className="absolute -top-2 -right-6 size-6 rotate-12 text-coral/70" />
-            </span>{" "}
-            to you.
+            <span className="inline-block -rotate-2">Personal to You.</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-ink lg:mx-0">
-            Shirts, gifts, teams and businesses, each piece made to order with a little Dabble &amp; Design magic.
-          </p>
-          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-            <Button href="/shop">Shop Ready-Made</Button>
-            <Button href="/custom" variant="outline">Make Something</Button>
+          <p className="mt-6 text-xl font-extrabold sm:text-2xl">Shirts • Gifts • Teams • Businesses</p>
+          <p className="mt-1 text-ink">Made with a little Dabble &amp; Design magic.</p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+            <Button href="/shop" variant="coral">Shop Ready-Made</Button>
+            <Button href="/custom" variant="teal">Make Something</Button>
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-          <Sparkle className="absolute -top-5 right-6 z-10 size-7 text-sun" />
+        {/* Photo: bleeds to the right edge of the screen on desktop */}
+        <div className="relative px-[var(--gutter)] pb-10 lg:px-0 lg:pb-0">
+          <Sparkle className="absolute top-6 left-8 z-10 size-7 text-sun lg:left-2" />
+          <Heart className="absolute top-10 right-8 z-10 size-9 -rotate-12 text-teal" />
           {/* Swap for her folded-shirt stack photo: src="/images/hero.jpg" */}
           <ProductImage
-            alt="Stack of custom shirts"
-            tone="coral"
-            className="aspect-[4/5] rounded-[2.5rem] shadow-[0_30px_60px_-20px_rgba(28,37,64,0.35)] lg:aspect-[5/4]"
+            alt="Stack of custom shirts and a hat"
+            tone="pink"
+            priority
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            className="aspect-[4/3] rounded-3xl lg:aspect-auto lg:h-full lg:min-h-[32rem] lg:rounded-none lg:rounded-bl-[3rem]"
           />
-          <div className="absolute -bottom-6 -left-4 rounded-2xl bg-paper px-5 py-4 shadow-xl ring-1 ring-navy/5 sm:-left-8">
-            <p className="font-script text-2xl leading-none text-teal">Made to order</p>
-            <p className="mt-1 text-xs font-bold tracking-widest text-navy/60 uppercase">Moline, Illinois</p>
-          </div>
         </div>
       </div>
     </section>

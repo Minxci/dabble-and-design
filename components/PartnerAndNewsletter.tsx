@@ -1,42 +1,49 @@
 import { Check } from "lucide-react";
 import Button from "./Button";
 import NewsletterForm from "./NewsletterForm";
+import ProductImage from "./ProductImage";
 import { Heart, Sparkle } from "./Doodles";
 
-const perks = ["Your logo saved on file", "Employee sizes on file", "Easy reorders", "Bulk pricing", "No membership fees"];
+const perks = ["Save your logo", "Easy pricing", "Save employee sizes", "Bulk pricing", "Easy reorders", "No membership fees"];
 
 export default function PartnerAndNewsletter() {
   return (
-    <section className="mx-auto grid max-w-7xl gap-6 px-5 py-24 sm:px-8 lg:grid-cols-5">
-      <div className="relative overflow-hidden rounded-[2rem] bg-navy p-8 text-paper sm:p-12 lg:col-span-3">
-        <div className="pointer-events-none absolute -right-24 -bottom-24 size-80 rounded-full bg-teal/25 blur-3xl" />
-        <p className="text-xs font-bold tracking-[0.25em] text-sun uppercase">Business Partner Program</p>
-        <h2 className="mt-4 font-display text-4xl leading-tight font-medium sm:text-5xl">
-          Your team changes.
-          <br />
-          Your apparel <span className="font-script text-teal">shouldn&apos;t</span> be a hassle.
-        </h2>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-          {perks.map((perk) => (
-            <li key={perk} className="flex items-center gap-3 text-paper/85">
-              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-teal/20 text-teal">
-                <Check className="size-3.5" aria-hidden />
-              </span>
-              {perk}
-            </li>
-          ))}
-        </ul>
-        <Button href="/business" variant="light" className="mt-10">Become a Partner</Button>
+    <section className="site-x grid gap-6 py-10 lg:grid-cols-[1.7fr_1fr]">
+      {/* Business partner */}
+      <div className="relative grid overflow-hidden rounded-2xl bg-teal-soft sm:grid-cols-[1.1fr_1fr]">
+        <Heart className="absolute top-5 left-4 size-6 -rotate-12 text-teal" />
+        <Sparkle className="absolute top-12 left-9 size-4 text-sun" />
+        <div className="p-7 sm:p-9">
+          <h2 className="font-script text-4xl sm:text-5xl">For Local Businesses</h2>
+          <p className="mt-2 font-extrabold">
+            Your team changes.
+            <br />
+            Your apparel shouldn&apos;t be a hassle.
+          </p>
+          <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            {perks.map((perk) => (
+              <li key={perk} className="flex items-center gap-2">
+                <Check className="size-4 shrink-0 stroke-[3] text-navy" aria-hidden />
+                {perk}
+              </li>
+            ))}
+          </ul>
+          <Button href="/business" variant="navy" className="mt-6 w-full sm:w-auto">
+            Become a Business Partner
+          </Button>
+        </div>
+        {/* Swap for her "Support Local Business" hat photo: src="/images/business-hat.jpg" */}
+        <ProductImage alt="Custom business hat and shirts" tone="navy" className="min-h-60" />
       </div>
 
-      <div className="relative flex flex-col justify-center overflow-hidden rounded-[2rem] bg-coral-soft p-8 text-center sm:p-12 lg:col-span-2">
-        <Heart className="absolute top-6 left-6 size-7 -rotate-12 text-coral/50" />
-        <Sparkle className="absolute top-8 right-8 size-6 text-sun" />
-        <p className="text-xs font-bold tracking-[0.25em] text-coral uppercase">The Dabble List</p>
-        <h2 className="mt-4 font-display text-4xl leading-tight font-medium">
-          Don&apos;t miss the <span className="font-script text-coral">next drop</span>
+      {/* Newsletter */}
+      <div className="relative flex flex-col justify-center rounded-2xl bg-pink-soft p-7 text-center sm:p-9">
+        <Heart className="absolute top-5 right-5 size-6 rotate-12 text-coral" />
+        <h2 className="flex items-center justify-center gap-2 font-script text-4xl">
+          <Heart className="size-5 text-coral" />
+          Don&apos;t Miss the Next Drop
         </h2>
-        <p className="mt-3 text-ink">New collections, seasonal designs and Dabble news, straight to your inbox.</p>
+        <p className="mt-2 text-ink">New collections, seasonal designs, exclusive releases and Dabble news.</p>
         <NewsletterForm />
       </div>
     </section>

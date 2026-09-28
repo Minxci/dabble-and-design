@@ -1,31 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* Neutrals */
-  --color-cream: #faf6f0;
-  --color-paper: #fffdfa;
-  --color-sand: #f1e9dd;
-  --color-navy: #1c2540;
-  --color-ink: #3a4260;
-
-  /* Brand (slightly deepened for a richer, calmer look) */
-  --color-teal: #22a99c;
-  --color-teal-soft: #e3f3f0;
-  --color-coral: #ec6a5e;
-  --color-coral-soft: #fbe7e3;
-  --color-sun: #f2b83a;
-  --color-sun-soft: #fbf0d6;
+  /* Colors pulled from Melissa's concept */
+  --color-cream: #fbf5ec;
+  --color-paper: #fffdf9;
+  --color-navy: #1d2447;
+  --color-ink: #3b4263;
+  --color-teal: #22b5ad;
+  --color-teal-soft: #d4f1ee;
+  --color-coral: #f4677a;
+  --color-pink-soft: #fde1e4;
+  --color-sun: #ffc53d;
+  --color-sun-soft: #fff0c9;
 
   /* Extra breakpoint for big monitors (1800px+) */
   --breakpoint-3xl: 112.5rem;
 
-  --font-display: var(--font-fraunces);
   --font-script: var(--font-caveat-brush);
   --font-sans: var(--font-nunito);
 }
 
-/* Everything is sized in rem, so this one line scales the whole site:
-   16px on phones and laptops, growing smoothly to 20px on big monitors. */
+/* Scales the whole site: 16px on phones and laptops, up to 20px on big monitors */
 html {
   font-size: clamp(16px, 0.35vw + 12px, 20px);
 }
@@ -35,7 +30,6 @@ html {
   --gutter: clamp(1.25rem, 4vw, 6rem);
 }
 
-/* Full-width section with responsive side padding */
 @utility site-x {
   width: 100%;
   padding-inline: var(--gutter);
@@ -47,20 +41,14 @@ html {
   padding-inline: var(--gutter);
 }
 
+/* Soft watercolor splotch behind the category icons */
+@utility watercolor {
+  border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-navy);
-}
-
-/* Soft paper grain, very subtle */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .no-scrollbar { scrollbar-width: none; }
