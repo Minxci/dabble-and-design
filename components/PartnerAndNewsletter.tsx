@@ -3,6 +3,7 @@ import Button from "./Button";
 import NewsletterForm from "./NewsletterForm";
 import ProductImage from "./ProductImage";
 import { Heart, Sparkle } from "./Doodles";
+import Image from "next/image";
 
 const perks = ["Save your logo", "Easy pricing", "Save employee sizes", "Bulk pricing", "Easy reorders", "No membership fees"];
 
@@ -33,7 +34,15 @@ export default function PartnerAndNewsletter() {
           </Button>
         </div>
         {/* Swap for her "Support Local Business" hat photo: src="/images/business-hat.jpg" */}
-        <ProductImage alt="Custom business hat and shirts" tone="navy" className="min-h-60" />
+        <div className="relative min-h-[18rem] overflow-hidden bg-navy">
+          <Image
+            src="/bizpartner-picture.png"
+            alt="Dabble & Design Co. Business Partner Program: saved logos, employee sizes, easy reorders and bulk pricing"
+            fill
+            sizes="(min-width: 768px) 30vw, 100vw"
+            className="object-cover object-top"
+          />
+        </div>
       </div>
 
       {/* Newsletter */}
